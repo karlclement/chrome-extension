@@ -25,9 +25,17 @@ function launchPopup() {
     });
   });
 
+  // Drag popup
   $("#eh_popup").draggable({ handle: ".eh_popup_drag" });
+
+  // Close popup
   $("#eh_overlay, .eh_popup_close").click(function() {
     closePopup();
+  });
+  $(document).keyup(function(e) {
+    if (e.keyCode == 27) {
+      closePopup();
+    }
   });
 }
 
@@ -56,7 +64,7 @@ function appendOverlay(callback) {
       'left': 0,
       'background-color': 'black',
       'width': '100%',
-      'z-index': 5000
+      'z-index': 11000
   });
 
   callback();
@@ -78,7 +86,7 @@ function openPopup(callback) {
       'left': windowWidth / 2 - 300,
       'padding': '30px',
       'width': '520px',
-      'z-index': 5001
+      'z-index': 11001
   });
 
   callback();
