@@ -1,0 +1,55 @@
+{
+  "name": "Email Hunter",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Find every email addresses form a domain name.",
+  "homepage_url": "https://emailhunter.co",
+  "icons": {
+    "16": "shared/img/icon16.png",
+    "48": "shared/img/icon48.png",
+    "128": "shared/img/icon128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "shared/img/icon19.png",
+      "38": "shared/img/icon38.png"
+    },
+    "default_title": "Find email addresses",
+    "default_popup": "browser_action/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.emailhunter.co/*"
+      ],
+      "js": [
+        "content_script/authentification.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "shared/css/fonts.css",
+        "content_script/linkedin-button.css",
+        "content_script/linkedin-popup.css"
+      ],
+      "js": [
+        "shared/js/jquery-1.11.3.min.js",
+        "content_script/linkedin-button.js",
+        "content_script/linkedin-popup.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "shared/img/*"
+  ]
+}

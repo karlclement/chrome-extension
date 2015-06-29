@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="../shared/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../shared/css/fonts.css" rel="stylesheet" type="text/css">
+    <link href="popup.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div class="header">
+      <a href="https://emailhunter.co/dashboard">
+        <img class="logo" src="../shared/img/white_transparent_logo.png" alt="Email Hunter" />
+      </a>
+      <a id="completeSearch" target="_blank" href="">
+        Complete search page
+      </a>
+    </div>
+    <div class="body">
+    <img class="loader" src="../shared/img/loader.gif" alt="Loading...">
+      <h1 id="currentDomain"></h1>
+
+      <div class="error">
+        <div class="error-message"></div>
+      </div>
+
+      <div class="connect-container">
+        <div class="connect-message">You've reached your daily limit! Please connect to your Email Hunter account to use the extension.</div>
+        <a href="https://emailhunter.co/users/sign_up" target="_blank" class="clear_cta">Create a free account</a>
+        <a href="https://emailhunter.co/chrome/welcome" target="_blank" class="signin_link">Sign in</a>
+      </div>
+
+      <div class="upgrade-container">
+        <div class="upgrade-message">You've reached your monthly quota. Please upgrade your account to continue using Email Hunter.</div>
+        <a href="https://emailhunter.co/subscription" target="_blank" class="clear_cta">Upgrade</a>
+      </div>
+
+      <div class="results">
+        <div id="resultsNumber"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../shared/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
+  </body>
+</html>

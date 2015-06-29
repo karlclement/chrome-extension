@@ -1,0 +1,214 @@
+/**
+ * Linkedin popup
+ **/
+
+
+#eh_popup {
+  font-family: "Open Sans", Helvetica, Ubuntu, Arial, sans-serif;
+  background-color: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.eh_popup_close {
+  float: right;
+  color: #888;
+  font-size: 30px;
+}
+
+.eh_popup_close:hover {
+  cursor: pointer;
+  color: #555;
+}
+
+.eh_popup_name {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.eh_popup_job_title {
+  font-size: 16px;
+  line-height: 22px;
+  color: #999;
+}
+
+#eh_popup_content {
+
+}
+
+.eh_popup_email_intro {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+#eh_popup_content_container {
+  height: 20px;
+  color: #D65B3C;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 15px 0 0 0;
+  border: 1px solid #F1D9D3;
+  padding: 25px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#eh_popup_content_container .loader {
+  width: 16px;
+  margin-right: 10px;
+  vertical-align: top;
+}
+
+#eh_popup_content_container:hover {
+  border: 1px solid #ECCAC1;
+}
+
+.eh_popup_results_message {
+  color: #999;
+  margin-top: 25px;
+}
+
+.eh_popup_results_link {
+  color: #999;
+  border-bottom: 1px dotted #999;
+  display: inline-block;
+  margin-top: 25px;
+  text-decoration: none;
+}
+
+.eh_popup_results_link:hover, .eh_popup_results_link:focus {
+  text-decoration: none;
+}
+
+#eh_popup_error {
+  font-size: 16px;
+  line-height: 22px;
+  margin: 30px 0 0 0;
+}
+
+.clear_cta {
+  text-decoration: none;
+  display: inline-block;
+  padding: 12px 25px;
+  color: #fff !important;
+  background: #D65B3C;
+  -webkit-transition: background-color 200ms ease-in-out;
+  -moz-transition: background-color 200ms ease-in-out;
+  -o-transition: background-color 200ms ease-in-out;
+  -ms-transition: background-color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.clear_cta:hover, .clear_cta:focus {
+  background: #B2381A;
+  color: #fff;
+  text-decoration: none;
+}
+
+#eh_popup_ask_domain {
+  display: none;
+  padding-bottom: 10px;
+}
+
+#eh_popup_ask_domain_message {
+  font-size: 16px;
+  line-height: 26px;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+#eh_popup_ask_domain_message strong {
+  font-weight: 600;
+}
+
+#eh_popup_ask_domain_message a {
+  color: #333;
+  border-bottom: 1px dotted #333;
+}
+
+#eh_popup_ask_domain_message a:hover {
+ text-decoration: none;
+}
+
+#eh_popup_ask_domain input[type="text"] {
+  font-size: 16px;
+}
+
+#eh_popup_ask_domain_field {
+  width: 250px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+}
+
+#eh_popup_ask_domain_field:focus, #eh_popup_ask_domain_field:active {
+  outline: none;
+  border: 1px solid #D65B3C;
+}
+
+#eh_popup_ask_domain button {
+  border: 0;
+  margin-left: 5px;
+}
+
+#eh_popup_ask_domain button:focus, #eh_popup_ask_domain button:active {
+  border: 0;
+  margin-left: 5px;
+}
+
+#eh_popup_results_link_container,
+#eh_popup_results_show {
+  display: none;
+}
+
+#eh_popup_results_show p {
+  font-size: 15px;
+  margin: 30px 0 0 0;
+  color: #999;
+}
+
+#eh_popup_results_show p strong {
+  font-weight: 600;
+  color: #555;
+}
+
+.eh_popup_email_list .eh_popup_ask_domain {
+  display: inline-block;
+  margin: 10px 0 0 0;
+}
+
+.eh_popup_email_list {
+  margin: 10px 0 0 0;
+}
+
+.eh_popup_ask_domain {
+  color: #999;
+  border-bottom: 1px dotted #999;
+}
+
+.eh_popup_ask_domain:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.eh_popup_separator {
+  margin: 0 5px;
+  color: #aaa;
+}
