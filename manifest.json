@@ -39,17 +39,20 @@
       ],
       "css": [
         "shared/css/fonts.css",
+        "shared/css/font-awesome.min.css",
         "content_script/linkedin-button.css",
         "content_script/linkedin-popup.css"
       ],
       "js": [
-        "shared/js/jquery-1.11.3.min.js",
+        "shared/js/jquery.min.js",
+        "shared/js/jquery-ui.min.js",
         "content_script/linkedin-button.js",
         "content_script/linkedin-popup.js"
       ]
     }
   ],
   "web_accessible_resources": [
-    "shared/img/*"
+    "shared/img/*",
+    "shared/fonts/*"
   ]
 }

@@ -15,6 +15,7 @@ $(".eh_linkedin_button").click(function() {
   launchPopup();
 });
 
+
 // Launch popup
 //
 function launchPopup() {
@@ -24,6 +25,7 @@ function launchPopup() {
     });
   });
 
+  $("#eh_popup").draggable({ handle: ".eh_popup_drag" });
   $("#eh_overlay, .eh_popup_close").click(function() {
     closePopup();
   });
@@ -48,7 +50,7 @@ function appendOverlay(callback) {
   $("#eh_overlay")
     .height(docHeight)
     .css({
-      'opacity' : 0.5,
+      'opacity' : 0.2,
       'position': 'absolute',
       'top': 0,
       'left': 0,
@@ -67,7 +69,7 @@ function openPopup(callback) {
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
 
-  $("body").append('<div id="eh_popup"><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div class="eh_popup_job_title">' + window.job_title + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"></div></div>');
+  $("body").append('<div id="eh_popup"><i class="fa fa-ellipsis-v eh_popup_drag"></i><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div class="eh_popup_job_title">' + window.job_title + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"></div></div>');
 
   $("#eh_popup")
     .css({
@@ -75,7 +77,7 @@ function openPopup(callback) {
       'top': windowHeight / 2 - 150,
       'left': windowWidth / 2 - 300,
       'padding': '30px',
-      'width': '550px',
+      'width': '520px',
       'z-index': 5001
   });
 

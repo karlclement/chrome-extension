@@ -13,6 +13,26 @@
   border-radius: 5px;
 }
 
+.eh_popup_drag {
+  position: absolute;
+  top: 21px;
+  right: 65px;
+  font-size: 18px;
+  padding: 10px;
+  color: #888;
+}
+
+.eh_popup_drag:hover {
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+.eh_popup_drag:active,
+.eh_popup_drag:focus {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
 .eh_popup_close {
   float: right;
   color: #888;
