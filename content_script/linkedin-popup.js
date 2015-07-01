@@ -135,7 +135,7 @@ function launchSearch() {
             if (json.results > 1) { es = '' }
             else { es = 'es' }
 
-            $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">' + json.results + ' email address' + es + ' for ' + window.domain + '</a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
+            $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">' + json.results + ' email address' + es + ' for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
 
             if (json.results == 0) {
               $("#eh_popup_results_show").html('<p>We found nothing on <strong>' + window.domain + '</strong>. Maybe <span class="eh_popup_ask_domain">try another domain name</span>?</p>');
@@ -150,7 +150,7 @@ function launchSearch() {
             });
 
             if (json.results > 0) {
-              $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">See results for ' + window.domain + '</a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
+              $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
             }
 
             $(".eh_popup_ask_domain").click(function () {

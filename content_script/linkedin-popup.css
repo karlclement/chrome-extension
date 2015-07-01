@@ -110,6 +110,11 @@
   text-decoration: none;
 }
 
+.eh_popup_results_link .fa-external-link {
+  font-size: 10px;
+  margin-left: 5px;
+}
+
 #eh_popup_error {
   font-size: 16px;
   line-height: 22px;
