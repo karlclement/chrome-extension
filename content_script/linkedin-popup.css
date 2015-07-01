@@ -236,3 +236,30 @@
   margin: 0 5px;
   color: #aaa;
 }
+
+.eh_popup_confidence {
+  margin-top: 15px;
+  color: #333;
+}
+
+.eh_popup_confidence_bar {
+  width: 200px;
+  height: 5px;
+  background-color: #eee;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.eh_popup_confidence_level {
+  background-color: #D65B3C;
+  height: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
