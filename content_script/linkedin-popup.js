@@ -200,6 +200,8 @@ function showConfidence(score) {
 // - a domain has been found but gives no result
 //
 function askDomainName(showMessage) {
+  $(".eh_popup_confidence_score").slideUp(300);
+
   $("#eh_popup_content_container").slideUp(300, function() {
     $("#eh_popup_ask_domain").slideDown(300, function() {
       $("#eh_popup_ask_domain_field").focus();
