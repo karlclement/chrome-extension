@@ -143,12 +143,12 @@ function launchSearch() {
               $("#eh_popup_results_show").html('<p>' + json.results + ' addresses found on ' + window.domain + ':</p>');
             }
 
-            $.each(json.emails.slice(0,5), function(email_key, email_val) {
+            $.each(json.emails.slice(0,10), function(email_key, email_val) {
               $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val.value + '</div>');
             });
 
             if (json.results > 0) {
-              $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><span class="eh_popup_ask_domain">Try with another domain name</span></div>');
+              $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">See results for ' + window.domain + '</a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
             }
 
             $(".eh_popup_ask_domain").click(function () {

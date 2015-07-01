@@ -15,8 +15,8 @@
 
 .eh_popup_drag {
   position: absolute;
-  top: 21px;
-  right: 65px;
+  top: 17px;
+  right: 60px;
   font-size: 18px;
   padding: 10px;
   color: #888;
@@ -34,7 +34,10 @@
 }
 
 .eh_popup_close {
-  float: right;
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  font-size: 18px;
   color: #888;
   font-size: 30px;
 }
@@ -69,7 +72,7 @@
   height: 20px;
   color: #D65B3C;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   margin: 15px 0 0 0;
   border: 1px solid #F1D9D3;
   padding: 25px;
@@ -209,7 +212,8 @@
   color: #555;
 }
 
-.eh_popup_email_list .eh_popup_ask_domain {
+.eh_popup_email_list .eh_popup_ask_domain,
+.eh_popup_email_list .eh_popup_results_link {
   display: inline-block;
   margin: 10px 0 0 0;
 }
