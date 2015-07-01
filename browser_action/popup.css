@@ -4,17 +4,21 @@ body {
   font-size: 100%;
   font-family: "Open Sans", Helvetica, Ubuntu, Arial, sans-serif;
 }
+
 a:focus, a:active {
   outline: none;
 }
+
 .header {
   background-color: #34312E;
   color: #fff;
 }
+
 .logo {
   height: 20px;
   margin: 25px;
 }
+
 #completeSearch {
   float: right;
   margin: 20px 25px 0 0;
@@ -32,9 +36,11 @@ a:focus, a:active {
   -ms-transition: background-color 200ms ease-in-out;
   transition: background-color 200ms ease-in-out;
 }
+
 #completeSearch:hover {
   background-color: #272422;
 }
+
 h1 {
   font-size: 1.5em;
   font-weight: 500;
@@ -42,75 +48,87 @@ h1 {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
+
 .loader {
   float: right;
   width: 20px;
 }
+
 .body {
   padding: 25px 25px 15px 25px;
 }
+
 .results {
   display: none;
 }
+
 .results p {
   margin: 0 0 20px 0;
 }
-.result {
 
-}
 #resultsNumber {
   color: #aaa;
   margin: 10px 0 20px 0;
 }
-.email-address {
 
-}
 .sources-link {
   float: right;
   color: #aaa;
 }
+
 .sources-link .fa {
   margin-left: 5px;
 }
+
 .sources-link:hover {
   cursor: pointer;
 }
+
 .sources-list {
   display: none;
   padding-bottom: 20px;
 }
+
 .source {
   font-size: 14px;
   margin-bottom: 5px;
 }
+
 .source a {
   color: #3285CC;
   text-decoration: none;
 }
+
 .source a:hover {
   text-decoration: underline;
 }
+
 .error {
   display: none;
   margin: 50px 0 30px 0;
 }
+
 .error-message {
   color: #aaa;
 }
+
 .connect-container, .upgrade-container {
   display: none;
   margin: 50px 0 30px 0;
 }
+
 .connect-message, .upgrade-message {
   color: #aaa;
   margin-bottom: 15px;
 }
+
 .signin_link {
   color: #333;
   margin-left: 10px;
   border-bottom: 1px dotted #333;
   text-decoration: none;
 }
+
 .clear_cta {
   text-decoration: none;
   display: inline-block;
@@ -126,16 +144,31 @@ h1 {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
+
 .clear_cta:hover, .clear_cta:focus {
   background: #B2381A;
   color: #fff;
 }
+
 .see_more {
   color: #3285CC;
   text-decoration: none;
   margin: 10px 0;
   display: inline-block;
 }
+
 .see_more:hover {
   text-decoration: underline;
+}
+
+.linkedin-notification {
+  margin: 10px 0 30px 0;
+  display: none;
+}
+
+.linkedin-notification .fa-linkedin {
+  font-size: 40px;
+  float: left;
+  margin-right: 20px;
+  color: #0077B5;
 }

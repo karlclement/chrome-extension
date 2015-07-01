@@ -13,6 +13,8 @@ chrome.tabs.getSelected(null, function(tab) {
       loadResults();
     }
   });
+
+  linkedinNotification();
 });
 
 
@@ -114,4 +116,13 @@ function sourcesText(sources) {
     sources = "20+ sources";
   }
   return sources;
+}
+
+
+// Show a notification to explain how to use EH on Linked if user is on Linkedin
+//
+function linkedinNotification() {
+  if (window.domain == "linkedin.com") {
+    $('.linkedin-notification').slideDown(300);
+  }
 }
