@@ -77,7 +77,7 @@ function openPopup(callback) {
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
 
-  $("body").append('<div id="eh_popup"><i class="fa fa-ellipsis-v eh_popup_drag"></i><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div class="eh_popup_job_title">' + window.job_title + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div class="eh_popup_confidence_score"></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"></div></div>');
+  $("body").append('<div id="eh_popup"><a href="https://emailhunter.co/chrome#faq" target="_blank"><i class="fa fa-question-circle eh_popup_question"></i></a><i class="fa fa-ellipsis-v eh_popup_drag"></i><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div class="eh_popup_job_title">' + window.job_title + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div class="eh_popup_confidence_score"></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"></div></div>');
 
   $("#eh_popup")
     .css({
