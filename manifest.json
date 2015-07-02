@@ -2,7 +2,7 @@
   "name": "Email Hunter",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Find every email addresses form a domain name.",
+  "description": "Email Hunter is the easiest way to find email addresses from anywhere on the web, with just one click.",
   "homepage_url": "https://emailhunter.co",
   "icons": {
     "16": "shared/img/icon16.png",
