@@ -1,5 +1,6 @@
 {
   "name": "Email Hunter",
+  "short_name": "Email Hunter",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Email Hunter is the easiest way to find email addresses from anywhere on the web, with just one click.",
