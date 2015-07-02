@@ -191,6 +191,7 @@ function mainMessagePopup(message, loader) {
 //
 function showConfidence(score) {
   $(".eh_popup_confidence_score").html('<div class="eh_popup_confidence">' + score + '% confidence</div><div class="eh_popup_confidence_bar"><div class="eh_popup_confidence_level" style="width: ' + score + '%;"></div></div>');
+  $(".eh_popup_confidence_score").show();
 }
 
 
