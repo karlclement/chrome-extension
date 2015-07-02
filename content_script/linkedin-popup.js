@@ -85,7 +85,7 @@ function openPopup(callback) {
       'top': windowHeight / 2 - 150,
       'left': windowWidth / 2 - 300,
       'padding': '30px',
-      'width': '520px',
+      'width': '560px',
       'z-index': 11001
   });
 
