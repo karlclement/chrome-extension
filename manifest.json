@@ -31,7 +31,9 @@
         "*://*.emailhunter.co/*"
       ],
       "js": [
-        "content_script/authentification.js"
+        "shared/js/jquery.min.js",
+        "content_script/authentification.js",
+        "content_script/install-check.js"
       ]
     },
     {
