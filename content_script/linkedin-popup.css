@@ -62,9 +62,11 @@
 }
 
 .eh_popup_name {
+  margin-top: -10px;
   font-size: 30px;
+  line-height: 33px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .eh_popup_job_title {
