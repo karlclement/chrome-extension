@@ -112,51 +112,60 @@ function launchSearch() {
             api_key = value["api_key"];
           }
           else { api_key = ''; }
-          generate_email_endpoint = 'https://api.emailhunter.co/v1/generate?domain=' + window.domain + '&first_name=' + window.first_name + '&last_name=' + window.last_name;
 
           // Generate the email
-          apiCall(api_key, generate_email_endpoint, function(json) {
+          generate_email_endpoint = 'https://api.emailhunter.co/v1/generate?domain=' + window.domain + '&first_name=' + window.first_name + '&last_name=' + window.last_name;
+          apiCall(api_key, generate_email_endpoint, function(email_json) {
             $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
-            if (json.email == null) {
-              mainMessagePopup("No result.");
-              $("#eh_popup_results_show").show();
-            }
-            else {
-              mainMessagePopup(json.email);
-              showConfidence(json.score);
 
-              $("#eh_popup_results_link_container").show();
-            }
-          });
+            count_endpoint = 'https://api.emailhunter.co/v1/internal/email-count.json?domain=' + window.domain;
+            apiCall(api_key, count_endpoint, function(count_json) {
 
-          domain_search_endpoint = 'https://api.emailhunter.co/v1/search?domain=' + window.domain;
-          apiCall(api_key, domain_search_endpoint, function(json) {
+              // If email has NOT been found
+              if (email_json.email == null) {
+                mainMessagePopup("No result.");
 
-            if (json.results > 1) { es = '' }
-            else { es = 'es' }
+                if (count_json.count == 0) {
+                  $("#eh_popup_results_show").html('<p>We found nothing on <strong>' + window.domain + '</strong>. Maybe <span class="eh_popup_ask_domain">try another domain name</span>?</p>');
+                } else if (count_json.count == 1) {
+                  $("#eh_popup_results_show").html('<p>One address found on ' + window.domain + ':</p>');
+                } else {
+                  $("#eh_popup_results_show").html('<p>' + count_json.count + ' addresses found on ' + window.domain + ':</p>');
+                }
 
-            $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">' + json.results + ' email address' + es + ' for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
+                // If we have at least one email on the domain, we show it to help
+                if (count_json.count > 0) {
+                  domain_search_endpoint = 'https://api.emailhunter.co/v1/search?domain=' + window.domain;
+                  apiCall(api_key, domain_search_endpoint, function(domain_json) {
+                    $.each(domain_json.emails.slice(0,10), function(email_key, email_val) {
+                      $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val.value + '</div>');
+                    });
 
-            if (json.results == 0) {
-              $("#eh_popup_results_show").html('<p>We found nothing on <strong>' + window.domain + '</strong>. Maybe <span class="eh_popup_ask_domain">try another domain name</span>?</p>');
-            } else if (json.results == 1) {
-              $("#eh_popup_results_show").html('<p>One address found on ' + window.domain + ':</p>');
-            } else {
-              $("#eh_popup_results_show").html('<p>' + json.results + ' addresses found on ' + window.domain + ':</p>');
-            }
+                    $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
+                  });
+                }
 
-            $.each(json.emails.slice(0,10), function(email_key, email_val) {
-              $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val.value + '</div>');
-            });
+                $("#eh_popup_results_show").slideDown(300);
+              }
 
-            if (json.results > 0) {
-              $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
-            }
+              // If email has been found
+              else {
+                mainMessagePopup(email_json.email);
+                showConfidence(email_json.score);
 
-            $(".eh_popup_ask_domain").click(function () {
-              $("#eh_popup_results_link_container").hide();
-              $("#eh_popup_results_show").hide();
-              askDomainName(false);
+                if (count_json.count > 1) { es = '' }
+                else { es = 'es' }
+                $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">' + count_json.count + ' email address' + es + ' for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
+
+                $("#eh_popup_results_link_container").slideDown(300);
+              }
+
+              // Try with another domain event
+              $(".eh_popup_ask_domain").click(function () {
+                $("#eh_popup_results_link_container").hide();
+                $("#eh_popup_results_show").hide();
+                askDomainName(false);
+              });
             });
           });
         });
@@ -266,8 +275,8 @@ function getWebsite(callback) {
 }
 
 
-// Calls Email Hunter API to look for the email pattern
-// Use the API key if it is defined. If there is a limitation problem, show the right limitation message
+// Ajax API call
+// Use the API key if it is defined. If there is a limitation issue, show the right limitation message
 //
 function apiCall(api_key, endpoint, callback) {
 
