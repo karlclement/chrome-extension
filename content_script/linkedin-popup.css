@@ -11,6 +11,7 @@
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+  font-size: 14px;
 }
 
 .eh_popup_drag {
@@ -49,11 +50,12 @@
 
 .eh_popup_close {
   position: absolute;
-  top: 26px;
-  right: 30px;
-  font-size: 18px;
+  top: 17px;
+  right: 23px;
+  font-size: 26px;
+  line-height: 16px;
+  padding: 10px;
   color: #888;
-  font-size: 30px;
 }
 
 .eh_popup_close:hover {
@@ -120,6 +122,7 @@
   display: inline-block;
   margin-top: 25px;
   text-decoration: none;
+  height: 16px;
 }
 
 .eh_popup_results_link:hover, .eh_popup_results_link:focus {

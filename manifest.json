@@ -49,6 +49,7 @@
       "js": [
         "shared/js/jquery.min.js",
         "shared/js/jquery-ui.min.js",
+        "content_script/linkedin-dom.js",
         "content_script/linkedin-button.js",
         "content_script/linkedin-popup.js"
       ]

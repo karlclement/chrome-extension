@@ -1,14 +1,3 @@
-// Get first name, last name, title and company
-//
-full_name_array = $(".full-name").text().split(" ");
-window.first_name = full_name_array[0];
-full_name_array.shift();
-window.last_name = full_name_array.join(" ");
-
-window.job_title = $("#headline .title").text()
-window.last_company = $(".current-position h5:last-child a").first().text();
-
-
 // Open popup on Linkedin profile
 //
 $(".eh_linkedin_button").click(function() {
@@ -250,23 +239,27 @@ function showError(error) {
 //
 function getWebsite(callback) {
   if (typeof window.domain == "undefined") {
-    if (typeof $(".current-position h4 a").first().attr("href") != "undefined") {
-      linkedin_company_page = "https://www.linkedin.com" + $(".current-position .new-miniprofile-container a").first().attr("href");
+    if (typeof window.last_company != "undefined") {
+      linkedin_company_page = "https://www.linkedin.com" + window.last_company_path;
       $.ajax({
         url : linkedin_company_page,
         type : 'GET',
         success : function(response){
-          if ($(response).find(".website a").text() == "http://") {
+          if (websiteFromCompanyPage(response) == "http://") {
             askDomainName(true);
           }
           else {
-            callback($(response).find(".website a").text());
+            console.log(websiteFromCompanyPage(response));
+            callback(websiteFromCompanyPage(response));
           }
         },
         error : function() {
           askDomainName(true);
         }
       });
+    }
+    else {
+      askDomainName(true);
     }
   }
   else {
@@ -291,11 +284,14 @@ function apiCall(api_key, endpoint, callback) {
       callback(json);
     },
     statusCode: {
+      400: function(xhr) {
+        showError('Sorry, something went wrong on the query.');
+      },
       401: function(xhr) {
         showError('Your API key seems not valid. Please connect to your account an generate a new key in your dashboard.');
       },
       500: function(xhr) {
-        showError('Something went wrong on our side. Please try again later.');
+        showError('Sorry, something went wrong on our side. Please try again later.');
       },
       429: function(xhr) {
         if (typeof api_key == "undefined") {
