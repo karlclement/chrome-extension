@@ -249,7 +249,6 @@ function getWebsite(callback) {
             askDomainName(true);
           }
           else {
-            console.log(websiteFromCompanyPage(response));
             callback(websiteFromCompanyPage(response));
           }
         },
