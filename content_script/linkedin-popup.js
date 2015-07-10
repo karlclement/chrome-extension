@@ -1,10 +1,3 @@
-// Open popup on Linkedin profile
-//
-$(".eh_linkedin_button").click(function() {
-  launchPopup();
-});
-
-
 // Launch popup
 //
 function launchPopup() {
