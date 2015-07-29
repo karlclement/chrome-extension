@@ -2,9 +2,53 @@
 //
 chrome.tabs.getSelected(null, function(tab) {
   window.domain = new URL(tab.url).hostname.replace("www.", "");
-  $("#currentDomain").text(domain);
+  $("#currentDomain").text(window.domain);
   $("#completeSearch").attr("href", "https://emailhunter.co/search/" + window.domain);
 
+  // Alternative search
+  withoutSudomainLink();
+
+  launchSearch();
+  linkedinNotification();
+});
+
+
+// Suggest to search without subdomain
+//
+function withoutSudomainLink() {
+  var subdomainsCount = (window.domain.match(/\./g) || []).length;
+  if (subdomainsCount > 1) {
+    newdomain = window.domain
+    newdomain = newdomain.substring(newdomain.indexOf(".") + 1);
+    $("#currentDomain").append('<span class="new-domain-link">Try only "' + newdomain + '"</a>');
+
+    $(".new-domain-link").click(function() {
+      newSearch(newdomain);
+    });
+  }
+}
+
+
+// Start a new search with a new domain
+//
+function newSearch(domain) {
+  window.domain = domain;
+
+  $("#currentDomain").text(window.domain);
+  $("#completeSearch").attr("href", "https://emailhunter.co/search/" + window.domain);
+  $(".loader").show();
+  $("#resultsNumber").text("");
+
+  $(".result").remove();
+  $(".see_more").remove();
+
+  launchSearch();
+}
+
+
+// Launch domain search
+//
+function launchSearch() {
   chrome.storage.sync.get('api_key', function(value){
     if (typeof value["api_key"] !== "undefined" && value["api_key"] !== "") {
       loadResults(value["api_key"]);
@@ -13,9 +57,7 @@ chrome.tabs.getSelected(null, function(tab) {
       loadResults();
     }
   });
-
-  linkedinNotification();
-});
+}
 
 
 // Load the email addresses search of the current domain
@@ -119,7 +161,7 @@ function sourcesText(sources) {
 }
 
 
-// Show a notification to explain how to use EH on Linked if user is on Linkedin
+// Show a notification to explain how to use EH on Linkedin if user is on Linkedin
 //
 function linkedinNotification() {
   if (window.domain == "linkedin.com") {

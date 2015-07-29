@@ -172,3 +172,15 @@ h1 {
   margin-right: 20px;
   color: #0077B5;
 }
+
+.new-domain-link {
+  font-size: 15px;
+  color: #aaa;
+  text-decoration: none;
+  border-bottom: 1px dotted #aaa;
+  margin-left: 10px;
+}
+
+.new-domain-link:hover {
+  cursor:pointer;
+}
