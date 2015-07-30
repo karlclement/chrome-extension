@@ -20,7 +20,7 @@ function withoutSudomainLink() {
   if (subdomainsCount > 1) {
     newdomain = window.domain
     newdomain = newdomain.substring(newdomain.indexOf(".") + 1);
-    $("#currentDomain").append('<span class="new-domain-link">Try only "' + newdomain + '"</a>');
+    $("#currentDomain").append("<span class='new-domain-link' title='Search just \"" + newdomain + "\"'>" + newdomain + "</a>");
 
     $(".new-domain-link").click(function() {
       newSearch(newdomain);
