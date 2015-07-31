@@ -124,6 +124,7 @@ function launchSearch() {
                     });
 
                     $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
+                    askNewDomainListener();
                   });
                 }
 
@@ -135,19 +136,14 @@ function launchSearch() {
                 mainMessagePopup(email_json.email);
                 showConfidence(email_json.score);
 
-                if (count_json.count > 1) { es = '' }
-                else { es = 'es' }
+                if (count_json.count > 1) { es = 'es' }
+                else { es = '' }
                 $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">' + count_json.count + ' email address' + es + ' for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
 
                 $("#eh_popup_results_link_container").slideDown(300);
               }
 
-              // Try with another domain event
-              $(".eh_popup_ask_domain").click(function () {
-                $("#eh_popup_results_link_container").hide();
-                $("#eh_popup_results_show").hide();
-                askDomainName(false);
-              });
+              askNewDomainListener();
             });
           });
         });
@@ -160,6 +156,17 @@ function launchSearch() {
   else {
     showError(window.first_name + ' has no current professional experience.');
   }
+}
+
+
+// Ask a new domain on click
+//
+function askNewDomainListener() {
+  $(".eh_popup_ask_domain").click(function () {
+    $("#eh_popup_results_link_container").hide();
+    $("#eh_popup_results_show").hide();
+    askDomainName(false);
+  });
 }
 
 
