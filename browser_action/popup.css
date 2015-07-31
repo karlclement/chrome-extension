@@ -12,6 +12,7 @@ a:focus, a:active {
 .header {
   background-color: #34312E;
   color: #fff;
+  height: 70px;
 }
 
 .logo {
@@ -21,7 +22,7 @@ a:focus, a:active {
 
 #completeSearch {
   float: right;
-  margin: 20px 25px 0 0;
+  margin: 16px 25px 0 0;
   display: inline-block;
   border: 1px solid #fff;
   padding: 7px 20px 6px 20px;
