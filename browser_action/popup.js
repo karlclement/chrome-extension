@@ -63,11 +63,16 @@ function launchSearch() {
 // Load the email addresses search of the current domain
 //
 function loadResults(api_key) {
-  if (typeof api_key == "undefined") { api_key_param = ""; }
-  else { api_key_param = "&api_key=" + api_key; }
+
+  if (typeof api_key == "undefined") {
+    url = 'https://api.emailhunter.co/trial/v1/search?domain=' + window.domain;
+  }
+  else {
+    url = 'https://api.emailhunter.co/v1/search?domain=' + window.domain + '&api_key=' + api_key;
+  }
 
   $.ajax({
-    url : 'https://api.emailhunter.co/v1/search?domain=' + window.domain + '&api_key=' + api_key,
+    url : url,
     type : 'GET',
     dataType : 'json',
     success : function(json){

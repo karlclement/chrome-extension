@@ -100,7 +100,7 @@ function launchSearch() {
           apiCall(api_key, generate_email_endpoint, function(email_json) {
             $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
 
-            count_endpoint = 'https://api.emailhunter.co/v1/email-count.json?domain=' + window.domain;
+            count_endpoint = 'https://api.emailhunter.co/v1/email-count?domain=' + window.domain;
             apiCall(api_key, count_endpoint, function(count_json) {
 
               // If email has NOT been found
@@ -272,8 +272,13 @@ function getWebsite(callback) {
 //
 function apiCall(api_key, endpoint, callback) {
 
-  if (api_key != '') { api_key_param = '&api_key=' + api_key; }
-  else { api_key_param = '' }
+  if (api_key != '') {
+    api_key_param = '&api_key=' + api_key;
+  }
+  else {
+    endpoint = endpoint.replace("https://api.emailhunter.co/v1/", "https://api.emailhunter.co/trial/v1/")
+    api_key_param = '';
+  }
 
   $.ajax({
     url : endpoint + api_key_param,
@@ -287,17 +292,17 @@ function apiCall(api_key, endpoint, callback) {
         showError('Sorry, something went wrong on the query.');
       },
       401: function(xhr) {
-        showError('Your API key seems not valid. Please connect to your account an generate a new key in your dashboard.');
+        showError('Email Hunter Chrome extension seems not to be associated to your account. Please sign in to continue.<br/><br/><a href="https://emailhunter.co/chrome/welcome" class="clear_cta" target="_blank">Sign in</a>');
       },
       500: function(xhr) {
         showError('Sorry, something went wrong on our side. Please try again later.');
       },
       429: function(xhr) {
-        if (typeof api_key == "undefined") {
-          showError('You\'ve reached your daily limit, please connect to your Email Hunter account to continue. It\'s free and take 30 seconds.<br/><br/><a href="https://emailhunter.co/users/sign_up" class="clear_cta" target="_blank">Create a free account</a>');
+        if (api_key != '') {
+          showError('You\'ve reached your monthly quota. Please upgrade your account to continue using Email Hunter.<br/><br/><a href="https://emailhunter.co/subscription" class="clear_cta" target="_blank">Upgrade my account</a>');
         }
         else {
-          showError('You\'ve reached your monthly quota. Please upgrade your account to continue using Email Hunter.<br/><br/><a href="https://emailhunter.co/subscription" class="clear_cta" target="_blank">Upgrade my account</a>');
+          showError('You\'ve reached your daily limit, please connect to your Email Hunter account to continue. It\'s free and take 30 seconds.<br/><br/><a href="https://emailhunter.co/users/sign_up" class="clear_cta" target="_blank">Create a free account</a>');
         }
       }
     }
