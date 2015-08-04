@@ -289,3 +289,14 @@
   -o-border-radius: 5px;
   border-radius: 5px;
 }
+
+.eh_popup_signin_link {
+  color: #333;
+  margin-left: 15px;
+  border-bottom: 1px dotted #333;
+  text-decoration: none;
+}
+
+.eh_popup_signin_link:hover {
+  text-decoration: none;
+}

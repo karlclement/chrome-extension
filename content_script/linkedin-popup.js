@@ -59,7 +59,7 @@ function openPopup(callback) {
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
 
-  $("body").append('<div id="eh_popup"><a href="https://emailhunter.co/chrome#faq" target="_blank"><i class="fa fa-question-circle eh_popup_question"></i></a><i class="fa fa-ellipsis-v eh_popup_drag"></i><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div class="eh_popup_job_title">' + window.job_title + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div class="eh_popup_confidence_score"></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"></div></div>');
+  $("body").append('<div id="eh_popup"><a href="https://emailhunter.co/chrome?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=linkedin_popup#faq" target="_blank"><i class="fa fa-question-circle eh_popup_question"></i></a><i class="fa fa-ellipsis-v eh_popup_drag"></i><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div class="eh_popup_job_title">' + window.job_title + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div class="eh_popup_confidence_score"></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"></div></div>');
 
   $("#eh_popup")
     .css({
@@ -123,7 +123,7 @@ function launchSearch() {
                       $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val.value + '</div>');
                     });
 
-                    $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
+                    $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=linkedin_popup" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
                     askNewDomainListener();
                   });
                 }
@@ -138,7 +138,7 @@ function launchSearch() {
 
                 if (count_json.count > 1) { es = 'es' }
                 else { es = '' }
-                $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '" target="_blank">' + count_json.count + ' email address' + es + ' for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
+                $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=linkedin_popup" target="_blank">' + count_json.count + ' email address' + es + ' for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
 
                 $("#eh_popup_results_link_container").slideDown(300);
               }
@@ -292,17 +292,17 @@ function apiCall(api_key, endpoint, callback) {
         showError('Sorry, something went wrong on the query.');
       },
       401: function(xhr) {
-        showError('Email Hunter Chrome extension seems not to be associated to your account. Please sign in to continue.<br/><br/><a href="https://emailhunter.co/chrome/welcome" class="clear_cta" target="_blank">Sign in</a>');
+        showError('Email Hunter Chrome extension seems not to be associated to your account. Please sign in to continue.<br/><br/><a href="https://emailhunter.co/users/sign_in?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=linkedin_popup" class="clear_cta" target="_blank">Sign in</a>');
       },
       500: function(xhr) {
         showError('Sorry, something went wrong on our side. Please try again later.');
       },
       429: function(xhr) {
         if (api_key != '') {
-          showError('You\'ve reached your monthly quota. Please upgrade your account to continue using Email Hunter.<br/><br/><a href="https://emailhunter.co/subscription" class="clear_cta" target="_blank">Upgrade my account</a>');
+          showError('You\'ve reached your monthly quota. Please upgrade your account to continue using Email Hunter.<br/><br/><a href="https://emailhunter.co/subscription?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=linkedin_popup" class="clear_cta" target="_blank">Upgrade my account</a>');
         }
         else {
-          showError('You\'ve reached your daily limit, please connect to your Email Hunter account to continue. It\'s free and take 30 seconds.<br/><br/><a href="https://emailhunter.co/users/sign_up" class="clear_cta" target="_blank">Create a free account</a>');
+          showError('You\'ve reached your daily limit, please connect to your Email Hunter account to continue. It\'s free and take 30 seconds.<br/><br/><a href="https://emailhunter.co/users/sign_up?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=linkedin_popup" class="clear_cta" target="_blank">Create a free account</a><a href="https://emailhunter.co/users/sign_in?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=linkedin_popup" class="eh_popup_signin_link" target="_blank">Sign in</a>');
         }
       }
     }
