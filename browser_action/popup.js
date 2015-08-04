@@ -3,7 +3,7 @@
 chrome.tabs.getSelected(null, function(tab) {
   window.domain = new URL(tab.url).hostname.replace("www.", "");
   $("#currentDomain").text(window.domain);
-  $("#completeSearch").attr("href", "https://emailhunter.co/search/" + window.domain + "?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=browser_popup");
+  $("#completeSearch").attr("href", "https://emailhunter.co/search/" + window.domain + "?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=browser_popup");
 
   // Alternative search
   withoutSudomainLink();
@@ -35,7 +35,7 @@ function newSearch(domain) {
   window.domain = domain;
 
   $("#currentDomain").text(window.domain);
-  $("#completeSearch").attr("href", "https://emailhunter.co/search/" + window.domain + "?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=browser_popup");
+  $("#completeSearch").attr("href", "https://emailhunter.co/search/" + window.domain + "?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=browser_popup");
   $(".loader").show();
   $("#resultsNumber").text("");
 
@@ -95,7 +95,7 @@ function loadResults(api_key) {
       });
 
       if (json.emails.length > 20) {
-        $(".results").append('<a class="see_more" target="_blank" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=acquisition_extension&utm_content=browser_popup">See all the emails</a>');
+        $(".results").append('<a class="see_more" target="_blank" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=browser_popup">See all the emails</a>');
       }
 
       // Deploy sources
