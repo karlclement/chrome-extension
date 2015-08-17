@@ -245,7 +245,7 @@ function getWebsite(callback) {
         url : linkedin_company_page,
         type : 'GET',
         success : function(response){
-          if (websiteFromCompanyPage(response) == "http://") {
+          if (websiteFromCompanyPage(response) == "http://" || websiteFromCompanyPage(response) == false) {
             askDomainName(true);
           }
           else {
