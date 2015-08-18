@@ -151,6 +151,11 @@ h1 {
   color: #fff;
 }
 
+.feedback_link {
+  width: 60px;
+  text-align: center;
+}
+
 .see_more {
   color: #3285CC;
   text-decoration: none;
@@ -172,6 +177,11 @@ h1 {
   float: left;
   margin-right: 20px;
   color: #0077B5;
+}
+
+.feedback-notification, .rate-notification, .contact-notification {
+  display: none;
+  padding-bottom: 30px;
 }
 
 .new-domain-link {

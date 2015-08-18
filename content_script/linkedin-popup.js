@@ -100,6 +100,9 @@ function launchSearch() {
           apiCall(api_key, generate_email_endpoint, function(email_json) {
             $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
 
+            // We count call to measure use
+            countCall();
+
             count_endpoint = 'https://api.emailhunter.co/v1/email-count?domain=' + window.domain;
             apiCall(api_key, count_endpoint, function(count_json) {
 

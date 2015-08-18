@@ -10,6 +10,7 @@ chrome.tabs.getSelected(null, function(tab) {
 
   launchSearch();
   linkedinNotification();
+  feedbackNotification();
 });
 
 
@@ -79,6 +80,9 @@ function loadResults(api_key) {
       $(".results").slideDown(300);
       resultsMessage(json.results);
       $(".loader").hide();
+
+      // We count call to measur use
+      countCall();
 
       // Each email
       $.each(json.emails.slice(0,20), function(email_key, email_val) {
@@ -173,3 +177,37 @@ function linkedinNotification() {
     $('.linkedin-notification').slideDown(300);
   }
 }
+
+
+// Show a notification to ask for feedback if user has made at leat 10 calls
+//
+
+function feedbackNotification() {
+  chrome.storage.sync.get('calls_count', function(value){
+    if (value['calls_count'] >= 10) {
+      chrome.storage.sync.get('has_given_feedback', function(value){
+        if (typeof value['has_given_feedback'] == "undefined") {
+          $('.feedback-notification').slideDown(300);
+        }
+      });
+    }
+  });
+}
+
+// Ask to note the extension
+$("#open-rate-notification").click(function() {
+  $('.feedback-notification').slideUp(300);
+  $(".rate-notification").slideDown(300);
+});
+
+// Ask to give use feedback
+$("#open-contact-notification").click(function() {
+  $('.feedback-notification').slideUp(300);
+  $(".contact-notification").slideDown(300);
+});
+
+$(".feedback_link").click(function() {
+  chrome.storage.sync.set({'has_given_feedback': true}, function() {
+    // The notification won't be shown again
+  });
+});
