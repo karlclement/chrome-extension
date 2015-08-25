@@ -74,6 +74,7 @@ function loadResults(api_key) {
 
   $.ajax({
     url : url,
+    headers: {"Email-Hunter-Origin": "chrome_extension"},
     type : 'GET',
     dataType : 'json',
     success : function(json){

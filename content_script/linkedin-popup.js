@@ -285,6 +285,7 @@ function apiCall(api_key, endpoint, callback) {
 
   $.ajax({
     url : endpoint + api_key_param,
+    headers: {"Email-Hunter-Origin": "chrome_extension"},
     type : 'GET',
     dataType : 'json',
     success : function(json){
