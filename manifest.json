@@ -26,7 +26,10 @@
     "*://*.linkedin.com/*"
   ],
   "background": {
-    "scripts": ["background/install-check.js"]
+    "scripts": [
+      "shared/js/jquery.min.js",
+      "background/install-check.js",
+      "background/current-tab.js"]
   },
   "content_scripts": [
     {

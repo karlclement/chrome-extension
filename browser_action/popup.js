@@ -82,7 +82,7 @@ function loadResults(api_key) {
       resultsMessage(json.results);
       $(".loader").hide();
 
-      // We count call to measur use
+      // We count call to measure use
       countCall();
 
       // Each email
