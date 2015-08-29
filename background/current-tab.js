@@ -45,13 +45,19 @@ function updateIconColor() {
 
 function setGreyIcon() {
   chrome.browserAction.setIcon({
-      path: chrome.extension.getURL("shared/img/icon38_grey.png")
+    path : {
+      "19": chrome.extension.getURL("shared/img/icon19_grey.png"),
+      "38": chrome.extension.getURL("shared/img/icon38_grey.png")
+    }
   });
 }
 
 function setColoredIcon() {
   chrome.browserAction.setIcon({
-      path: chrome.extension.getURL("shared/img/icon38.png")
+    path : {
+      "19": chrome.extension.getURL("shared/img/icon19.png"),
+      "38": chrome.extension.getURL("shared/img/icon38.png")
+    }
   });
 }
 
