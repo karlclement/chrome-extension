@@ -278,8 +278,10 @@ function apiCall(api_key, endpoint, callback) {
   if (api_key != '') {
     api_key_param = '&api_key=' + api_key;
   }
-  else {
-    endpoint = endpoint.replace("https://api.emailhunter.co/v1/", "https://api.emailhunter.co/trial/v1/")
+  else if (endpoint.indexOf("email-count") == -1) {
+    endpoint = endpoint.replace("https://api.emailhunter.co/v1/", "https://api.emailhunter.co/trial/v1/");
+    api_key_param = '';
+  } else {
     api_key_param = '';
   }
 
