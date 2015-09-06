@@ -5,10 +5,10 @@ function injectLinkedinButton() {
   var icon = chrome.extension.getURL('shared/img/icon48_white.png');
 
   if (isSalesNavigator()) {
-    $(".profile-actions").prepend('<button style="margin: 0 10px 0 0;" class="eh_linkedin_button eh_linked_connected"><img src="' + icon + '">Email</button>');
+    $(".profile-actions").prepend('<button style="margin: 0 10px 0 0;" class="eh_linkedin_button eh_linked_connected"><img src="' + icon + '">Email Hunter</button>');
   }
   else {
-    $(".profile-aux .profile-actions").prepend('<button style="margin: 0 5px 0 0;" class="eh_linkedin_button eh_linked_connected"><img src="' + icon + '">Email</button>');
+    $(".profile-aux .profile-actions").prepend('<button style="margin: 0 5px 0 0;" class="eh_linkedin_button eh_linked_connected"><img src="' + icon + '">Email Hunter</button>');
   }
 }
 

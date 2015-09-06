@@ -63,6 +63,21 @@
   color: #555;
 }
 
+#eh_popup_legal_mention {
+  color: #bbb;
+  margin-top: 30px;
+  font-size: 12px;
+}
+
+#eh_popup_legal_mention a {
+  color: #bbb;
+  border-bottom: 1px dotted #aaa;
+}
+
+#eh_popup_legal_mention a {
+  text-decoration: none;
+}
+
 .eh_popup_name {
   margin-top: -10px;
   font-size: 30px;
@@ -75,10 +90,6 @@
   font-size: 16px;
   line-height: 22px;
   color: #999;
-}
-
-#eh_popup_content {
-
 }
 
 .eh_popup_email_intro {

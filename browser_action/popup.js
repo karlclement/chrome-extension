@@ -176,6 +176,9 @@ function sourcesText(sources) {
 function linkedinNotification() {
   if (window.domain == "linkedin.com") {
     $('.linkedin-notification').slideDown(300);
+    $('#currentDomain').hide();
+    $('#completeSearch').hide();
+    $('.results').hide();
   }
 }
 
