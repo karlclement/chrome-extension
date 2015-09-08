@@ -9,8 +9,8 @@ chrome.tabs.getSelected(null, function(tab) {
   withoutSudomainLink();
 
   launchSearch();
-  linkedinNotification();
   feedbackNotification();
+  linkedinNotification();
 });
 
 
@@ -72,71 +72,79 @@ function loadResults(api_key) {
     url = 'https://api.emailhunter.co/v1/search?domain=' + window.domain + '&api_key=' + api_key;
   }
 
-  $.ajax({
-    url : url,
-    headers: {"Email-Hunter-Origin": "chrome_extension"},
-    type : 'GET',
-    dataType : 'json',
-    success : function(json){
-      $(".results").slideDown(300);
-      resultsMessage(json.results);
-      $(".loader").hide();
+  if (window.domain == "linkedin.com") {
+    $('#currentDomain').hide();
+    $('#completeSearch').hide();
+    $('.results').hide();
+    $(".loader").hide();
+  }
+  else {
+    $.ajax({
+      url : url,
+      headers: {"Email-Hunter-Origin": "chrome_extension"},
+      type : 'GET',
+      dataType : 'json',
+      success : function(json){
+        $(".results").slideDown(300);
+        resultsMessage(json.results);
+        $(".loader").hide();
 
-      // We count call to measure use
-      countCall();
+        // We count call to measure use
+        countCall();
 
-      // Each email
-      $.each(json.emails.slice(0,20), function(email_key, email_val) {
-        $(".results").append('<div class="result"><p class="sources-link">' + sourcesText(email_val.sources.length) + '<i class="fa fa-caret-down"></i></p><p class="email-address">' + email_val.value + '</p><div class="sources-list"></div></div>');
+        // Each email
+        $.each(json.emails.slice(0,20), function(email_key, email_val) {
+          $(".results").append('<div class="result"><p class="sources-link">' + sourcesText(email_val.sources.length) + '<i class="fa fa-caret-down"></i></p><p class="email-address">' + email_val.value + '</p><div class="sources-list"></div></div>');
 
-        // Each source
-        $.each(email_val.sources, function(source_key, source_val) {
+          // Each source
+          $.each(email_val.sources, function(source_key, source_val) {
 
-          if (source_val.uri.length > 60) { show_link = source_val.uri.substring(0, 50) + "..."; }
-          else { show_link = source_val.uri; }
+            if (source_val.uri.length > 60) { show_link = source_val.uri.substring(0, 50) + "..."; }
+            else { show_link = source_val.uri; }
 
-          $(".sources-list").last().append('<div class="source"><a href="' + source_val.uri + '" target="_blank">' + show_link + '</a></div>');
+            $(".sources-list").last().append('<div class="source"><a href="' + source_val.uri + '" target="_blank">' + show_link + '</a></div>');
+          });
         });
-      });
 
-      if (json.emails.length > 20) {
-        $(".results").append('<a class="see_more" target="_blank" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=browser_popup">See all the emails</a>');
-      }
+        if (json.emails.length > 20) {
+          $(".results").append('<a class="see_more" target="_blank" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=browser_popup">See all the emails</a>');
+        }
 
-      // Deploy sources
-      $(".sources-link").click(function () {
-        if ($(this).parent().find(".sources-list").is(":visible")) {
-          $(this).parent().find(".sources-list").slideUp(300);
-          $(this).find(".fa-caret-up").removeClass("fa-caret-up").addClass("fa-caret-down")
-        }
-        else {
-          $(this).parent().find(".sources-list").slideDown(300);
-          $(this).find(".fa-caret-down").removeClass("fa-caret-down").addClass("fa-caret-up")
-        }
-      });
-    },
-    statusCode: {
-      401: function(xhr) {
-        $(".connect-container").slideDown(300);
-        $(".loader").hide();
+        // Deploy sources
+        $(".sources-link").click(function () {
+          if ($(this).parent().find(".sources-list").is(":visible")) {
+            $(this).parent().find(".sources-list").slideUp(300);
+            $(this).find(".fa-caret-up").removeClass("fa-caret-up").addClass("fa-caret-down")
+          }
+          else {
+            $(this).parent().find(".sources-list").slideDown(300);
+            $(this).find(".fa-caret-down").removeClass("fa-caret-down").addClass("fa-caret-up")
+          }
+        });
       },
-      500: function(xhr) {
-        $(".error-message").text("Something went wrong on our side, please try again later.");
-        $(".error").slideDown(300);
-        $(".loader").hide();
-      },
-      429: function(xhr) {
-        if (typeof api_key == "undefined") {
+      statusCode: {
+        401: function(xhr) {
           $(".connect-container").slideDown(300);
           $(".loader").hide();
-        }
-        else {
-          $(".upgrade-container").slideDown(300);
+        },
+        500: function(xhr) {
+          $(".error-message").text("Something went wrong on our side, please try again later.");
+          $(".error").slideDown(300);
           $(".loader").hide();
+        },
+        429: function(xhr) {
+          if (typeof api_key == "undefined") {
+            $(".connect-container").slideDown(300);
+            $(".loader").hide();
+          }
+          else {
+            $(".upgrade-container").slideDown(300);
+            $(".loader").hide();
+          }
         }
       }
-    }
-  });
+    });
+  }
 }
 
 
@@ -176,9 +184,6 @@ function sourcesText(sources) {
 function linkedinNotification() {
   if (window.domain == "linkedin.com") {
     $('.linkedin-notification').slideDown(300);
-    $('#currentDomain').hide();
-    $('#completeSearch').hide();
-    $('.results').hide();
   }
 }
 
