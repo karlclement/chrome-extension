@@ -4,7 +4,7 @@
 // Chrome local storage.
 //
 if (window.location.href == "https://emailhunter.co/chrome/welcome" ||
-    window.location.href == "https://emailhunter.co/dashboard") {
+    window.location.href == "https://emailhunter.co/search") {
   api_key = document.getElementById("api_key").innerHTML;
   chrome.storage.sync.set({'api_key': api_key}, function() {
     console.log("Email Hunter extension successfully installed.");
