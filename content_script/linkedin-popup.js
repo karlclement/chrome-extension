@@ -129,7 +129,7 @@ function launchSearch() {
 
               // If email has been found
               else {
-                showFoundEmailAddress(email_json);
+                showFoundEmailAddress(email_json, count_json);
               }
 
               askNewDomainListener();
@@ -150,7 +150,7 @@ function launchSearch() {
 
 // Show the email address found
 //
-function showFoundEmailAddress(email_json) {
+function showFoundEmailAddress(email_json, count_json) {
   $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
   mainMessagePopup(email_json.email);
   showConfidence(email_json.score);

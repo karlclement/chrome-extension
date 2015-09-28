@@ -19,7 +19,6 @@ chrome.tabs.getSelected(null, function(tab) {
 function withoutSudomainLink() {
   if (withoutSubDomain(window.domain)) {
     $("#currentDomain").append("<span class='new-domain-link' title='Search just \"" + newdomain + "\"'>" + newdomain + "</a>");
-
     $(".new-domain-link").click(function() {
       newSearch(newdomain);
     });
