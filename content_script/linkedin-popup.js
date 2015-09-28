@@ -109,7 +109,7 @@ function launchSearch() {
               // If email addresses has NOT been found
               if (email_json.email == null) {
 
-                // Maybe try to remove a subdomain if there is
+                // Maybe try to remove a subdomain if there is one
                 if (withoutSubDomain(window.domain)) {
                   window.domain = withoutSubDomain(window.domain);
                   launchSearch();
@@ -123,16 +123,19 @@ function launchSearch() {
                   if (count_json.count > 0) {
                     showEmailList();
                   }
-                  $("#eh_popup_results_show").slideDown(300);
+
+                  // Maybe there are email addresses directly on the profile! Let's show them :)
+                  showParsedEmailAddresses()
                 }
               }
 
               // If email has been found
               else {
                 showFoundEmailAddress(email_json, count_json);
+                showParsedEmailAddresses();
               }
 
-              askNewDomainListener();
+            askNewDomainListener();
             });
           });
         });
@@ -148,7 +151,7 @@ function launchSearch() {
 }
 
 
-// Show the email address found
+// Show the main email address found
 //
 function showFoundEmailAddress(email_json, count_json) {
   $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
@@ -167,14 +170,42 @@ function showFoundEmailAddress(email_json, count_json) {
 //
 function showResultsCountMessage(results_number) {
   if (results_number == 0) {
-    $("#eh_popup_results_show").html('<p>We found nothing on <strong>' + window.domain + '</strong>. Maybe <span class="eh_popup_ask_domain">try another domain name</span>?</p>');
+    $("#eh_popup_results_show").append('<p>Nothing found on <strong>' + window.domain + '</strong>. Maybe <span class="eh_popup_ask_domain">try another domain name</span>?</p>');
   } else if (results_number == 1) {
-    $("#eh_popup_results_show").html('<p>One address found on ' + window.domain + ':</p>');
+    $("#eh_popup_results_show").append('<p>One address found on ' + window.domain + ':</p>');
   } else {
-    $("#eh_popup_results_show").html('<p>' + results_number + ' addresses found on ' + window.domain + ':</p>');
+    $("#eh_popup_results_show").append('<p>' + results_number + ' addresses found on ' + window.domain + ':</p>');
   }
 }
 
+
+// Search for email addresses on a string (in this case, the page body)
+//
+function parseProfileEmailAddresses(string) {
+  return string.match(/([a-zA-Z][\w+\-.]+@[a-zA-Z\d\-]+(\.[a-zA-Z]+)*\.[a-zA-Z]+)/gi);
+}
+
+
+//
+//
+function showParsedEmailAddresses() {
+  email_addresses = parseProfileEmailAddresses($("#background").html());
+
+  if (email_addresses != null && email_addresses.length > 0) {
+    if (email_addresses.length == 1) {
+      $("#eh_popup_results_show").append('<p>One email address found on this profile:</p>');
+    }
+    else {
+      $("#eh_popup_results_show").append('<p>' + email_addresses.length + ' email addresses found on this profile:</p>');
+    }
+
+    $.each(email_addresses.slice(0,10), function(email_key, email_val) {
+      $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val + '</div>');
+    });
+
+    $("#eh_popup_results_show").slideDown(300);
+  }
+}
 
 // Show a list of email addresses found on the domain name
 //
@@ -188,6 +219,8 @@ function showEmailList() {
     $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
     askNewDomainListener();
   });
+
+  $("#eh_popup_results_show").slideDown(300);
 }
 
 
