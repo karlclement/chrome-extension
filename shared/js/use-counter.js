@@ -1,4 +1,3 @@
-//
 // Every time a user make a successful search, we count it in Chrome local storage.
 // This is used to display a notification to rate the extension or give feedback.
 //

@@ -17,10 +17,7 @@ chrome.tabs.getSelected(null, function(tab) {
 // Suggest to search without subdomain
 //
 function withoutSudomainLink() {
-  var subdomainsCount = (window.domain.match(/\./g) || []).length;
-  if (subdomainsCount > 1) {
-    newdomain = window.domain
-    newdomain = newdomain.substring(newdomain.indexOf(".") + 1);
+  if (withoutSubDomain(window.domain)) {
     $("#currentDomain").append("<span class='new-domain-link' title='Search just \"" + newdomain + "\"'>" + newdomain + "</a>");
 
     $(".new-domain-link").click(function() {
