@@ -118,14 +118,12 @@ function launchSearch() {
                   $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
                   mainMessagePopup("No result.");
                   showResultsCountMessage(count_json.count);
+                  $("#eh_popup_results_show").slideDown(300);
 
                   // If we have at least one email on the domain, we show it to help
                   if (count_json.count > 0) {
                     showEmailList();
                   }
-
-                  // Maybe there are email addresses directly on the profile! Let's show them :)
-                  showParsedEmailAddresses()
                 }
               }
 
@@ -133,6 +131,7 @@ function launchSearch() {
               else {
                 showFoundEmailAddress(email_json, count_json);
                 showParsedEmailAddresses();
+                $("#eh_popup_results_show").slideDown(300);
               }
 
             askNewDomainListener();
@@ -162,7 +161,7 @@ function showFoundEmailAddress(email_json, count_json) {
   else { es = '' }
   $('#eh_popup_results_link_container').html('<a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" target="_blank">' + count_json.count + ' email address' + es + ' for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with an other domain name</span>');
 
-  $("#eh_popup_results_link_container").slideDown(300);
+  $('#eh_popup_results_link_container').slideDown(300);
 }
 
 
@@ -186,24 +185,28 @@ function parseProfileEmailAddresses(string) {
 }
 
 
-//
+// Display the list of email addresses directly found on the profile
 //
 function showParsedEmailAddresses() {
   email_addresses = parseProfileEmailAddresses($("#background").html());
 
   if (email_addresses != null && email_addresses.length > 0) {
-    if (email_addresses.length == 1) {
-      $("#eh_popup_results_show").append('<p>One email address found on this profile:</p>');
-    }
-    else {
-      $("#eh_popup_results_show").append('<p>' + email_addresses.length + ' email addresses found on this profile:</p>');
-    }
-
-    $.each(email_addresses.slice(0,10), function(email_key, email_val) {
-      $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val + '</div>');
+    var unique_email_addresses = [];
+    $.each(email_addresses, function(i, el){
+      if($.inArray(el, unique_email_addresses) === -1) unique_email_addresses.push(el);
     });
 
-    $("#eh_popup_results_show").slideDown(300);
+    $("#eh_popup_results_show").append("<hr>");
+    if (unique_email_addresses.length == 1) {
+      $("#eh_popup_results_show").append('<p>One email address found on the profile:</p>');
+    }
+    else {
+      $("#eh_popup_results_show").append('<p>' + unique_email_addresses.length + ' email addresses found on this profile:</p>');
+    }
+
+    $.each(unique_email_addresses.slice(0,5), function(email_key, email_val) {
+      $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val + '</div>');
+    });
   }
 }
 
@@ -212,12 +215,15 @@ function showParsedEmailAddresses() {
 function showEmailList() {
   domain_search_endpoint = 'https://api.emailhunter.co/v1/search?domain=' + window.domain;
   apiCall(api_key, domain_search_endpoint, function(domain_json) {
-    $.each(domain_json.emails.slice(0,10), function(email_key, email_val) {
+    $.each(domain_json.emails.slice(0,5), function(email_key, email_val) {
       $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val.value + '</div>');
     });
 
     $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
     askNewDomainListener();
+
+    // Maybe there are email addresses directly on the profile! Let's show them :)
+    showParsedEmailAddresses()
   });
 
   $("#eh_popup_results_show").slideDown(300);
