@@ -59,7 +59,7 @@ function openPopup(callback) {
   var windowHeight = $(window).height();
   var windowWidth = $(window).width();
 
-  $("body").append('<div id="eh_popup"><a href="https://emailhunter.co/chrome?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup#faq" target="_blank"><i class="fa fa-question-circle eh_popup_question"></i></a><i class="fa fa-ellipsis-v eh_popup_drag"></i><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div class="eh_popup_confidence_score"></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"></div><div id="eh_popup_legal_mention">Email Hunter\'s button and this popup are added by Email Hunter\'s Chrome extension. Email Hunter is not affiliated to LinkedIn. <a href="https://emailhunter.co/chrome?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup#faq" target="_blank">Learn more</a>.</div></div>');
+  $("body").append('<div id="eh_popup"><a href="https://emailhunter.co/chrome?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup#faq" target="_blank"><i class="fa fa-question-circle eh_popup_question"></i></a><i class="fa fa-ellipsis-v eh_popup_drag"></i><div class="eh_popup_close">&times;</div><div class="eh_popup_name">' + window.first_name + ' ' + window.last_name + '</div><div id="eh_popup_error"></div><form id="eh_popup_ask_domain"><div id="eh_popup_ask_domain_message"></div><input placeholder="company.com" id="eh_popup_ask_domain_field" type="text" name="domain"><button class="clear_cta" type="submit">Find</button></form><div id="eh_popup_content_container"><div id="eh_popup_content"></div></div><div class="eh_popup_confidence_score"></div><div id="eh_popup_results_link_container"></div><div id="eh_popup_results_show"><div class="eh_popup_found_email_addresses"></div><div class="eh_popup_parsed_email_addresses"></div></div><div id="eh_popup_legal_mention">Email Hunter\'s button and this popup are added by Email Hunter\'s Chrome extension. Email Hunter is not affiliated to LinkedIn. <a href="https://emailhunter.co/chrome?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup#faq" target="_blank">Learn more</a>.</div></div>');
 
   $("#eh_popup")
     .css({
@@ -124,6 +124,9 @@ function launchSearch() {
                   if (count_json.count > 0) {
                     showEmailList();
                   }
+
+                  // Maybe there are email addresses directly on the profile! Let's show them :)
+                  showParsedEmailAddresses();
                 }
               }
 
@@ -169,11 +172,11 @@ function showFoundEmailAddress(email_json, count_json) {
 //
 function showResultsCountMessage(results_number) {
   if (results_number == 0) {
-    $("#eh_popup_results_show").append('<p>Nothing found on <strong>' + window.domain + '</strong>. Maybe <span class="eh_popup_ask_domain">try another domain name</span>?</p>');
+    $(".eh_popup_found_email_addresses").append('<p>Nothing found on <strong>' + window.domain + '</strong>. Maybe <span class="eh_popup_ask_domain">try another domain name</span>?</p>');
   } else if (results_number == 1) {
-    $("#eh_popup_results_show").append('<p>One address found on ' + window.domain + ':</p>');
+    $(".eh_popup_found_email_addresses").append('<p>One email address found on ' + window.domain + ':</p>');
   } else {
-    $("#eh_popup_results_show").append('<p>' + results_number + ' addresses found on ' + window.domain + ':</p>');
+    $(".eh_popup_found_email_addresses").append('<p>' + results_number + ' email addresses found on ' + window.domain + ':</p>');
   }
 }
 
@@ -189,6 +192,7 @@ function parseProfileEmailAddresses(string) {
 //
 function showParsedEmailAddresses() {
   email_addresses = parseProfileEmailAddresses($("#background").html());
+  console.log(email_addresses);
 
   if (email_addresses != null && email_addresses.length > 0) {
     var unique_email_addresses = [];
@@ -196,16 +200,16 @@ function showParsedEmailAddresses() {
       if($.inArray(el, unique_email_addresses) === -1) unique_email_addresses.push(el);
     });
 
-    $("#eh_popup_results_show").append("<hr>");
+    $(".eh_popup_parsed_email_addresses").append("<hr>");
     if (unique_email_addresses.length == 1) {
-      $("#eh_popup_results_show").append('<p>One email address found on the profile:</p>');
+      $(".eh_popup_parsed_email_addresses").append('<p>One email address found on the profile:</p>');
     }
     else {
-      $("#eh_popup_results_show").append('<p>' + unique_email_addresses.length + ' email addresses found on this profile:</p>');
+      $(".eh_popup_parsed_email_addresses").append('<p>' + unique_email_addresses.length + ' email addresses found on this profile:</p>');
     }
 
     $.each(unique_email_addresses.slice(0,5), function(email_key, email_val) {
-      $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val + '</div>');
+      $(".eh_popup_parsed_email_addresses").append('<div class="eh_popup_email_list">' + email_val + '</div>');
     });
   }
 }
@@ -216,14 +220,11 @@ function showEmailList() {
   domain_search_endpoint = 'https://api.emailhunter.co/v1/search?domain=' + window.domain;
   apiCall(api_key, domain_search_endpoint, function(domain_json) {
     $.each(domain_json.emails.slice(0,5), function(email_key, email_val) {
-      $("#eh_popup_results_show").append('<div class="eh_popup_email_list">' + email_val.value + '</div>');
+      $(".eh_popup_found_email_addresses").append('<div class="eh_popup_email_list">' + email_val.value + '</div>');
     });
 
-    $("#eh_popup_results_show").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
+    $(".eh_popup_found_email_addresses").append('<div class="eh_popup_email_list"><a class="eh_popup_results_link" href="https://emailhunter.co/search/' + window.domain + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" target="_blank">See results for ' + window.domain + '<i class="fa fa-external-link"></i></a> <span class="eh_popup_separator">•</span> <span class="eh_popup_ask_domain">Try with another domain name</span></div>');
     askNewDomainListener();
-
-    // Maybe there are email addresses directly on the profile! Let's show them :)
-    showParsedEmailAddresses()
   });
 
   $("#eh_popup_results_show").slideDown(300);
