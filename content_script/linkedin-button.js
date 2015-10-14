@@ -6,9 +6,11 @@ function injectLinkedinButton() {
 
   if (isSalesNavigator()) {
     $(".profile-actions").prepend('<button style="margin: 0 10px 0 0;" class="eh_linkedin_button eh_linked_connected"><img src="' + icon + '">Email Hunter</button>');
+  } else if(isRecruiter()) {
+    $(".profile-actions").prepend('<button style="margin: 0 10px 0 0;" class="eh_linkedin_button eh_linkedin_button_small eh_linked_connected"><img src="' + icon + '">Email Hunter</button>');
   }
   else {
-    $(".profile-aux .profile-actions").prepend('<button style="margin: 0 5px 0 0;" class="eh_linkedin_button eh_linked_connected"><img src="' + icon + '">Email Hunter</button>');
+    $(".profile-aux .profile-actions").prepend('<button style="margin: 5px 5px 5px 0;" class="eh_linkedin_button eh_linked_connected"><img src="' + icon + '">Email Hunter</button>');
   }
 }
 

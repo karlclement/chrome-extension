@@ -191,26 +191,26 @@ function parseProfileEmailAddresses(string) {
 // Display the list of email addresses directly found on the profile
 //
 function showParsedEmailAddresses() {
-  email_addresses = parseProfileEmailAddresses($("#background").html());
-  console.log(email_addresses);
+  if (typeof window.profile_main_content != "undefined") {
+    email_addresses = parseProfileEmailAddresses(window.profile_main_content);
+    if (email_addresses != null && email_addresses.length > 0) {
+      var unique_email_addresses = [];
+      $.each(email_addresses, function(i, el){
+        if($.inArray(el, unique_email_addresses) === -1) unique_email_addresses.push(el);
+      });
 
-  if (email_addresses != null && email_addresses.length > 0) {
-    var unique_email_addresses = [];
-    $.each(email_addresses, function(i, el){
-      if($.inArray(el, unique_email_addresses) === -1) unique_email_addresses.push(el);
-    });
+      $(".eh_popup_parsed_email_addresses").append("<hr>");
+      if (unique_email_addresses.length == 1) {
+        $(".eh_popup_parsed_email_addresses").append('<p>One email address found on the profile:</p>');
+      }
+      else {
+        $(".eh_popup_parsed_email_addresses").append('<p>' + unique_email_addresses.length + ' email addresses found on this profile:</p>');
+      }
 
-    $(".eh_popup_parsed_email_addresses").append("<hr>");
-    if (unique_email_addresses.length == 1) {
-      $(".eh_popup_parsed_email_addresses").append('<p>One email address found on the profile:</p>');
+      $.each(unique_email_addresses.slice(0,5), function(email_key, email_val) {
+        $(".eh_popup_parsed_email_addresses").append('<div class="eh_popup_email_list">' + email_val + '</div>');
+      });
     }
-    else {
-      $(".eh_popup_parsed_email_addresses").append('<p>' + unique_email_addresses.length + ' email addresses found on this profile:</p>');
-    }
-
-    $.each(unique_email_addresses.slice(0,5), function(email_key, email_val) {
-      $(".eh_popup_parsed_email_addresses").append('<div class="eh_popup_email_list">' + email_val + '</div>');
-    });
   }
 }
 
@@ -310,8 +310,12 @@ function showError(error) {
 //
 function getWebsite(callback) {
   if (typeof window.domain == "undefined") {
-    if (typeof window.last_company != "undefined") {
-      linkedin_company_page = "https://www.linkedin.com" + window.last_company_path;
+    if (typeof window.last_company != "undefined" && typeof window.last_company_path != "undefined") {
+      if (window.last_company_path.indexOf("linkedin.com") > -1) {
+        linkedin_company_page = window.last_company_path;
+      } else {
+        linkedin_company_page = "https://www.linkedin.com" + window.last_company_path;
+      }
       $.ajax({
         url : linkedin_company_page,
         type : 'GET',
