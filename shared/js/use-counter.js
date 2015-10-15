@@ -4,7 +4,7 @@
 
 function countCall() {
   chrome.storage.sync.get('calls_count', function(value){
-    if (typeof value == "undefined") {
+    if (Object.keys(value).length === 0) {
       value['calls_count'] = 1;
     }
     else {
