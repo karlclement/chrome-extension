@@ -31,6 +31,7 @@ else {
   var full_name = $("title").text().substring(0, $("title").text().indexOf(" |"));
 }
 
+full_name = cleanName(full_name);
 full_name_array = full_name.split(" ");
 
 // First name
@@ -91,4 +92,33 @@ function websiteFromCompanyPage(html) {
       return false;
     }
   }
+}
+
+
+//
+// Clean the name by removing some
+//
+function cleanName(full_name) {
+  String.prototype.allReplace = function(obj) {
+      var retStr = this;
+      for (var x in obj) {
+          retStr = retStr.replace(new RegExp(x, 'g'), obj[x]);
+      }
+      return retStr;
+  };
+
+  return full_name.allReplace(
+    {
+      ',? Jr.?': '',
+      ',? Sr.?': '',
+      ',? MBA': '',
+      ',? CPA': '',
+      ',? PhD': '',
+      ',? MD': '',
+      ',? MHA': '',
+      ',? CGA': '',
+      ',? ACCA': '',
+      ',? PMP': ''
+    }
+  );
 }
