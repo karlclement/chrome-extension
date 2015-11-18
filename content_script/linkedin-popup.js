@@ -365,23 +365,23 @@ function apiCall(api_key, endpoint, callback) {
     success : function(json){
       callback(json);
     },
-    statusCode: {
-      400: function(xhr) {
+    error: function(xhr) {
+      if (xhr.status == 400) {
         showError('Sorry, something went wrong on the query.');
-      },
-      401: function(xhr) {
+      }
+      else if (xhr.status == 401) {
         showError('Email Hunter Chrome extension seems not to be associated to your account. Please sign in to continue.<br/><br/><a href="https://emailhunter.co/users/sign_in?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" class="clear_cta" target="_blank">Sign in</a>');
-      },
-      500: function(xhr) {
-        showError('Sorry, something went wrong on our side. Please try again later.');
-      },
-      429: function(xhr) {
+      }
+      else if (xhr.status == 429) {
         if (api_key != '') {
           showError('You\'ve reached your monthly quota. Please upgrade your account to continue using Email Hunter.<br/><br/><a href="https://emailhunter.co/subscription?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" class="clear_cta" target="_blank">Upgrade my account</a>');
         }
         else {
           showError('You\'ve reached your daily limit, please connect to your Email Hunter account to continue. It\'s free and takes 30 seconds.<br/><br/><a href="https://emailhunter.co/users/sign_up?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" class="clear_cta" target="_blank">Create a free account</a><a href="https://emailhunter.co/users/sign_in?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=linkedin_popup" class="eh_popup_signin_link" target="_blank">Sign in</a>');
         }
+      }
+      else {
+        showError('Sorry, something went wrong. Please try again later.');
       }
     }
   });

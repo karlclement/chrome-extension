@@ -118,17 +118,17 @@ function loadResults(api_key) {
           }
         });
       },
-      statusCode: {
-        401: function(xhr) {
-          $(".connect-container").slideDown(300);
-          $(".loader").hide();
-        },
-        500: function(xhr) {
-          $(".error-message").text("Something went wrong on our side, please try again later.");
+      error: function(xhr) {
+        if (xhr.status == 400) {
+          $(".error-message").text("Sorry, something went wrong on the query.");
           $(".error").slideDown(300);
           $(".loader").hide();
-        },
-        429: function(xhr) {
+        }
+        else if (xhr.status == 401) {
+          $(".connect-again-container").slideDown(300);
+          $(".loader").hide();
+        }
+        else if (xhr.status == 429) {
           if (typeof api_key == "undefined") {
             $(".connect-container").slideDown(300);
             $(".loader").hide();
@@ -137,6 +137,11 @@ function loadResults(api_key) {
             $(".upgrade-container").slideDown(300);
             $(".loader").hide();
           }
+        }
+        else {
+          $(".error-message").text("Something went wrong, please try again later.");
+          $(".error").slideDown(300);
+          $(".loader").hide();
         }
       }
     });

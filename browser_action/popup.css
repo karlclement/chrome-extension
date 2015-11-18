@@ -113,12 +113,16 @@ h1 {
   color: #aaa;
 }
 
-.connect-container, .upgrade-container {
+.connect-container,
+.connect-again-container,
+.upgrade-container {
   display: none;
   margin: 50px 0 30px 0;
 }
 
-.connect-message, .upgrade-message {
+.connect-message,
+.connect-again-container,
+.upgrade-message {
   color: #aaa;
   margin-bottom: 15px;
 }
