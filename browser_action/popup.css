@@ -52,7 +52,7 @@ h1 {
 
 .loader {
   float: right;
-  width: 20px;
+  color: #aaa;
 }
 
 .body {

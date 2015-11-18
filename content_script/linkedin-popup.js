@@ -115,7 +115,6 @@ function launchSearch() {
                   launchSearch();
                 }
                 else {
-                  $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
                   mainMessagePopup("No result.");
                   showResultsCountMessage(count_json.count);
                   $("#eh_popup_results_show").slideDown(300);
@@ -156,7 +155,6 @@ function launchSearch() {
 // Show the main email address found
 //
 function showFoundEmailAddress(email_json, count_json) {
-  $("#eh_popup_content_container").css({'background-color': '#FFFCF4'});
   mainMessagePopup(email_json.email);
   showConfidence(email_json.score);
 
@@ -248,7 +246,7 @@ function mainMessagePopup(message, loader) {
   console.log(message);
   loader = loader || false;
   if (loader == true) {
-    loader_html = '<img class="loader" src="' + chrome.extension.getURL('shared/img/loader.gif') + '" alt="Loading...">';
+    loader_html = '<i class="fa fa-spinner fa-spin loader"></i>';
   }
   else { loader_html = ''; }
 

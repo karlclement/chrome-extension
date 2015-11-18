@@ -99,6 +99,7 @@
   font-size: 16px;
   margin: 15px 0 0 0;
   border: 1px solid #F1D9D3;
+  background-color: #FFFCF4;
   padding: 25px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -108,9 +109,8 @@
 }
 
 #eh_popup_content_container .loader {
-  width: 16px;
   margin-right: 10px;
-  vertical-align: top;
+  color: #888;
 }
 
 #eh_popup_content_container:hover {
