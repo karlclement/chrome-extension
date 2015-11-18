@@ -90,7 +90,8 @@ function loadResults(api_key) {
 
         // Each email
         $.each(json.emails.slice(0,20), function(email_key, email_val) {
-          $(".results").append('<div class="result"><p class="sources-link">' + sourcesText(email_val.sources.length) + '<i class="fa fa-caret-down"></i></p><p class="email-address">' + email_val.value + '</p><div class="sources-list"></div></div>');
+          $(".results").append('<div class="result"><p class="sources-link">' + sourcesText(email_val.sources.length) + '<i class="fa fa-caret-down"></i></p><p class="email-address">' + email_val.value + ' <a href="https://emailhunter.co/verify/' + email_val.value + '?utm_source=chrome_extension&utm_medium=extension&utm_campaign=extension&utm_content=browser_popup" target="_blank" class="verify_email" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verify this email address"><i class="fa fa-check"></i></a></p><div class="sources-list"></div></div>');
+          $('[data-toggle="tooltip"]').tooltip();
 
           // Each source
           $.each(email_val.sources, function(source_key, source_val) {
